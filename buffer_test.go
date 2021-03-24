@@ -4,18 +4,32 @@
 package buffer
 
 import (
+	"sync"
 	"testing"
 )
 
 func TestAssignPool(t *testing.T) {
 	for i := 0; i < 2; i++ {
-		size := 1024
+		size := 64 * 1024
 		p := AssignPool(size)
 		buf := p.GetBuffer(size)
 		if len(buf) < size {
 			t.Error(len(buf))
 		}
 		p.PutBuffer(buf)
+	}
+	wg := sync.WaitGroup{}
+	for i := 0; i < numShards*10; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for j := 0; j < 64*1024; j++ {
+				p := AssignPool(j)
+				if p.size != j {
+					t.Errorf("pool length error: %d != %d", p.size, j)
+				}
+			}
+		}()
 	}
 }
 
@@ -57,10 +71,10 @@ func BenchmarkAssignPoolAndBuffers(b *testing.B) {
 
 func BenchmarkSizedBuffer(b *testing.B) {
 	bs := newBuffers()
-	length := 64 * 1024
-	p := bs.AssignPool(length)
+	size := 64 * 1024
+	p := bs.AssignPool(size)
 	for i := 0; i < b.N; i++ {
-		buf := p.GetBuffer(length)
+		buf := p.GetBuffer(size)
 		p.PutBuffer(buf)
 	}
 }
