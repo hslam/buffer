@@ -8,8 +8,14 @@ import (
 	"sync/atomic"
 )
 
+const numShards = 256
+
 type buffers struct {
-	sync.Map
+	shards [numShards]Map
+}
+
+type Map struct {
+	*sync.Map
 	assign int32
 }
 
@@ -30,23 +36,28 @@ func (p *Pool) PutBuffer(buf []byte) {
 }
 
 func newBuffers() *buffers {
-	return new(buffers)
+	b := new(buffers)
+	for i := range b.shards {
+		b.shards[i].Map = &sync.Map{}
+	}
+	return b
 }
 
 func (b *buffers) AssignPool(size int) *Pool {
+	m := &b.shards[size%numShards]
 	for {
-		if p, ok := b.Load(size); ok {
+		if p, ok := m.Load(size); ok {
 			return p.(*Pool)
 		}
-		if atomic.CompareAndSwapInt32(&b.assign, 0, 1) {
+		if atomic.CompareAndSwapInt32(&m.assign, 0, 1) {
 			var pool = &Pool{
 				pool: &sync.Pool{New: func() interface{} {
 					return make([]byte, size)
 				}},
 				size: size,
 			}
-			b.Store(size, pool)
-			atomic.StoreInt32(&b.assign, 0)
+			m.Store(size, pool)
+			atomic.StoreInt32(&m.assign, 0)
 			return pool
 		}
 	}
