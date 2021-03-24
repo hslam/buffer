@@ -10,15 +10,34 @@ var (
 	assign  int32
 )
 
-func AssignPool(size int) *sync.Pool {
+type Pool struct {
+	pool *sync.Pool
+	size int
+}
+
+func (p *Pool) GetBuffer(length int) []byte {
+	return p.pool.Get().([]byte)
+}
+
+func (p *Pool) PutBuffer(buf []byte) {
+	buf = buf[:cap(buf)]
+	if cap(buf) >= p.size {
+		p.pool.Put(buf)
+	}
+}
+
+func AssignPool(size int) *Pool {
 	for {
 		if p, ok := buffers.Load(size); ok {
-			return p.(*sync.Pool)
+			return p.(*Pool)
 		}
 		if atomic.CompareAndSwapInt32(&assign, 0, 1) {
-			var pool = &sync.Pool{New: func() interface{} {
-				return make([]byte, size)
-			}}
+			var pool = &Pool{
+				pool: &sync.Pool{New: func() interface{} {
+					return make([]byte, size)
+				}},
+				size: size,
+			}
 			buffers.Store(size, pool)
 			atomic.StoreInt32(&assign, 0)
 			return pool
