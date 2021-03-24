@@ -5,7 +5,6 @@ package buffer
 
 import (
 	"sync"
-	"sync/atomic"
 )
 
 const numShards = 256
@@ -15,8 +14,8 @@ type buffers struct {
 }
 
 type Map struct {
-	*sync.Map
-	assign int32
+	lock sync.RWMutex
+	data map[int]*Pool
 }
 
 type Pool struct {
@@ -38,29 +37,33 @@ func (p *Pool) PutBuffer(buf []byte) {
 func newBuffers() *buffers {
 	b := new(buffers)
 	for i := range b.shards {
-		b.shards[i].Map = &sync.Map{}
+		b.shards[i].data = make(map[int]*Pool)
 	}
 	return b
 }
 
 func (b *buffers) AssignPool(size int) *Pool {
 	m := &b.shards[size%numShards]
-	for {
-		if p, ok := m.Load(size); ok {
-			return p.(*Pool)
-		}
-		if atomic.CompareAndSwapInt32(&m.assign, 0, 1) {
-			var pool = &Pool{
-				pool: &sync.Pool{New: func() interface{} {
-					return make([]byte, size)
-				}},
-				size: size,
-			}
-			m.Store(size, pool)
-			atomic.StoreInt32(&m.assign, 0)
-			return pool
-		}
+	m.lock.RLock()
+	if p, ok := m.data[size]; ok {
+		m.lock.RUnlock()
+		return p
 	}
+	m.lock.RUnlock()
+	m.lock.Lock()
+	if p, ok := m.data[size]; ok {
+		m.lock.Unlock()
+		return p
+	}
+	p := &Pool{
+		pool: &sync.Pool{New: func() interface{} {
+			return make([]byte, size)
+		}},
+		size: size,
+	}
+	m.data[size] = p
+	m.lock.Unlock()
+	return p
 }
 
 var defaultBuffers = newBuffers()
