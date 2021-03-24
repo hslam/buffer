@@ -1,4 +1,9 @@
 # buffer
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/hslam/buffer)](https://pkg.go.dev/github.com/hslam/buffer)
+[![Build Status](https://github.com/hslam/buffer/workflows/build/badge.svg)](https://github.com/hslam/buffer/actions)
+[![codecov](https://codecov.io/gh/hslam/buffer/branch/master/graph/badge.svg)](https://codecov.io/gh/hslam/buffer)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hslam/buffer)](https://goreportcard.com/report/github.com/hslam/buffer)
+[![LICENSE](https://img.shields.io/github/license/hslam/buffer.svg?style=flat-square)](https://github.com/hslam/buffer/blob/master/LICENSE)
 
 Package buffer implements a variable-sized bytes pool.
 
