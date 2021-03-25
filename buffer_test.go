@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestUnit(t *testing.T) {
+func TestPage(t *testing.T) {
 	b := NewBuffers(0)
 	pages := []int{0, 1, 512, 1023, 1024, 1024}
 	sizes := []int{1024, 1024, 1024, 1024, 1024, 1025}
@@ -51,7 +51,7 @@ func BenchmarkAssignPool(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit2(b *testing.B) {
+func BenchmarkAssignPoolPage2(b *testing.B) {
 	bs := NewBuffers(2)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -59,7 +59,7 @@ func BenchmarkAssignPoolUnit2(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit4(b *testing.B) {
+func BenchmarkAssignPoolPage4(b *testing.B) {
 	bs := NewBuffers(4)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -67,7 +67,7 @@ func BenchmarkAssignPoolUnit4(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit8(b *testing.B) {
+func BenchmarkAssignPoolPage8(b *testing.B) {
 	bs := NewBuffers(8)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -75,7 +75,7 @@ func BenchmarkAssignPoolUnit8(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit16(b *testing.B) {
+func BenchmarkAssignPoolPage16(b *testing.B) {
 	bs := NewBuffers(16)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -83,7 +83,7 @@ func BenchmarkAssignPoolUnit16(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit32(b *testing.B) {
+func BenchmarkAssignPoolPage32(b *testing.B) {
 	bs := NewBuffers(32)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -91,7 +91,7 @@ func BenchmarkAssignPoolUnit32(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit64(b *testing.B) {
+func BenchmarkAssignPoolPage64(b *testing.B) {
 	bs := NewBuffers(64)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -99,7 +99,7 @@ func BenchmarkAssignPoolUnit64(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit128(b *testing.B) {
+func BenchmarkAssignPoolPage128(b *testing.B) {
 	bs := NewBuffers(128)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -107,7 +107,7 @@ func BenchmarkAssignPoolUnit128(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit256(b *testing.B) {
+func BenchmarkAssignPoolPage256(b *testing.B) {
 	bs := NewBuffers(256)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -115,7 +115,7 @@ func BenchmarkAssignPoolUnit256(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit512(b *testing.B) {
+func BenchmarkAssignPoolPage512(b *testing.B) {
 	bs := NewBuffers(512)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -123,7 +123,7 @@ func BenchmarkAssignPoolUnit512(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit1024(b *testing.B) {
+func BenchmarkAssignPoolPage1024(b *testing.B) {
 	bs := NewBuffers(1024)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -131,7 +131,7 @@ func BenchmarkAssignPoolUnit1024(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit2048(b *testing.B) {
+func BenchmarkAssignPoolPage2048(b *testing.B) {
 	bs := NewBuffers(2048)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -139,7 +139,7 @@ func BenchmarkAssignPoolUnit2048(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit4096(b *testing.B) {
+func BenchmarkAssignPoolPage4096(b *testing.B) {
 	bs := NewBuffers(4096)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -147,7 +147,7 @@ func BenchmarkAssignPoolUnit4096(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit8192(b *testing.B) {
+func BenchmarkAssignPoolPage8192(b *testing.B) {
 	bs := NewBuffers(8192)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -155,7 +155,7 @@ func BenchmarkAssignPoolUnit8192(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolUnit16384(b *testing.B) {
+func BenchmarkAssignPoolPage16384(b *testing.B) {
 	bs := NewBuffers(16384)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -181,7 +181,7 @@ func BenchmarkBuffers(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit2(b *testing.B) {
+func BenchmarkBuffersPage2(b *testing.B) {
 	bs := NewBuffers(2)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -190,7 +190,7 @@ func BenchmarkBuffersUnit2(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit4(b *testing.B) {
+func BenchmarkBuffersPage4(b *testing.B) {
 	bs := NewBuffers(4)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -199,7 +199,7 @@ func BenchmarkBuffersUnit4(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit8(b *testing.B) {
+func BenchmarkBuffersPage8(b *testing.B) {
 	bs := NewBuffers(8)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -208,7 +208,7 @@ func BenchmarkBuffersUnit8(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit16(b *testing.B) {
+func BenchmarkBuffersPage16(b *testing.B) {
 	bs := NewBuffers(16)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -217,7 +217,7 @@ func BenchmarkBuffersUnit16(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit32(b *testing.B) {
+func BenchmarkBuffersPage32(b *testing.B) {
 	bs := NewBuffers(32)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -226,7 +226,7 @@ func BenchmarkBuffersUnit32(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit64(b *testing.B) {
+func BenchmarkBuffersPage64(b *testing.B) {
 	bs := NewBuffers(64)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -235,7 +235,7 @@ func BenchmarkBuffersUnit64(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit128(b *testing.B) {
+func BenchmarkBuffersPage128(b *testing.B) {
 	bs := NewBuffers(128)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -244,7 +244,7 @@ func BenchmarkBuffersUnit128(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit256(b *testing.B) {
+func BenchmarkBuffersPage256(b *testing.B) {
 	bs := NewBuffers(256)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -253,7 +253,7 @@ func BenchmarkBuffersUnit256(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit512(b *testing.B) {
+func BenchmarkBuffersPage512(b *testing.B) {
 	bs := NewBuffers(512)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -262,7 +262,7 @@ func BenchmarkBuffersUnit512(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit1024(b *testing.B) {
+func BenchmarkBuffersPage1024(b *testing.B) {
 	bs := NewBuffers(1024)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -271,7 +271,7 @@ func BenchmarkBuffersUnit1024(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit2048(b *testing.B) {
+func BenchmarkBuffersPage2048(b *testing.B) {
 	bs := NewBuffers(2048)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -280,7 +280,7 @@ func BenchmarkBuffersUnit2048(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit4096(b *testing.B) {
+func BenchmarkBuffersPage4096(b *testing.B) {
 	bs := NewBuffers(4096)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -289,7 +289,7 @@ func BenchmarkBuffersUnit4096(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit8192(b *testing.B) {
+func BenchmarkBuffersPage8192(b *testing.B) {
 	bs := NewBuffers(8192)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -298,7 +298,7 @@ func BenchmarkBuffersUnit8192(b *testing.B) {
 	}
 }
 
-func BenchmarkBuffersUnit16384(b *testing.B) {
+func BenchmarkBuffersPage16384(b *testing.B) {
 	bs := NewBuffers(16384)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -317,7 +317,7 @@ func BenchmarkAssignPoolAndBuffers(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit2(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage2(b *testing.B) {
 	bs := NewBuffers(2)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -327,7 +327,7 @@ func BenchmarkAssignPoolAndBuffersUnit2(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit4(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage4(b *testing.B) {
 	bs := NewBuffers(4)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -337,7 +337,7 @@ func BenchmarkAssignPoolAndBuffersUnit4(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit8(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage8(b *testing.B) {
 	bs := NewBuffers(8)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -347,7 +347,7 @@ func BenchmarkAssignPoolAndBuffersUnit8(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit16(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage16(b *testing.B) {
 	bs := NewBuffers(16)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -357,7 +357,7 @@ func BenchmarkAssignPoolAndBuffersUnit16(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit32(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage32(b *testing.B) {
 	bs := NewBuffers(32)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -367,7 +367,7 @@ func BenchmarkAssignPoolAndBuffersUnit32(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit64(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage64(b *testing.B) {
 	bs := NewBuffers(64)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -377,7 +377,7 @@ func BenchmarkAssignPoolAndBuffersUnit64(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit128(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage128(b *testing.B) {
 	bs := NewBuffers(128)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -387,7 +387,7 @@ func BenchmarkAssignPoolAndBuffersUnit128(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit256(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage256(b *testing.B) {
 	bs := NewBuffers(256)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -397,7 +397,7 @@ func BenchmarkAssignPoolAndBuffersUnit256(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit512(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage512(b *testing.B) {
 	bs := NewBuffers(512)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -407,7 +407,7 @@ func BenchmarkAssignPoolAndBuffersUnit512(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit1024(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage1024(b *testing.B) {
 	bs := NewBuffers(1024)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -417,7 +417,7 @@ func BenchmarkAssignPoolAndBuffersUnit1024(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit2048(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage2048(b *testing.B) {
 	bs := NewBuffers(2048)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -427,7 +427,7 @@ func BenchmarkAssignPoolAndBuffersUnit2048(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit4096(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage4096(b *testing.B) {
 	bs := NewBuffers(4096)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -437,7 +437,7 @@ func BenchmarkAssignPoolAndBuffersUnit4096(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit8192(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage8192(b *testing.B) {
 	bs := NewBuffers(8192)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
@@ -447,7 +447,7 @@ func BenchmarkAssignPoolAndBuffersUnit8192(b *testing.B) {
 	}
 }
 
-func BenchmarkAssignPoolAndBuffersUnit16384(b *testing.B) {
+func BenchmarkAssignPoolAndBuffersPage16384(b *testing.B) {
 	bs := NewBuffers(16384)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
