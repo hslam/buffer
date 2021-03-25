@@ -10,12 +10,12 @@ import (
 
 const (
 	numBuckets = 256
-	unit       = 1024
+	page       = 1024
 )
 
 // Buffers contains buckets for sharding.
 type Buffers struct {
-	unit    int
+	page    int
 	buckets [numBuckets]bucket
 }
 
@@ -43,20 +43,20 @@ func (p *Pool) PutBuffer(buf []byte) {
 	}
 }
 
-// NewBuffers creates a new Buffers .
-func NewBuffers(unit int) *Buffers {
+// NewBuffers creates a new Buffers with the given page size.
+func NewBuffers(page int) *Buffers {
 	b := new(Buffers)
 	for i := range b.buckets {
 		b.buckets[i].pools = make(map[int]*Pool)
 	}
-	b.unit = unit
+	b.page = page
 	return b
 }
 
 // AssignPool assigns a fixed size bytes pool with the given size.
 func (b *Buffers) AssignPool(size int) (p *Pool) {
-	if b.unit > 0 && size%b.unit > 0 {
-		size = size/b.unit*b.unit + b.unit
+	if b.page > 0 && size%b.page > 0 {
+		size = size/b.page*b.page + b.page
 	}
 	m := &b.buckets[size%numBuckets]
 	var ok bool
@@ -91,7 +91,7 @@ func (b *Buffers) PutBuffer(buf []byte) {
 }
 
 // defaultBuffers is the default instance of *Buffers.
-var defaultBuffers = NewBuffers(unit)
+var defaultBuffers = NewBuffers(page)
 
 // AssignPool assigns a fixed size bytes pool with the given size.
 func AssignPool(size int) *Pool {

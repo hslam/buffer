@@ -9,17 +9,17 @@ import (
 
 func TestUnit(t *testing.T) {
 	b := NewBuffers(0)
-	units := []int{0, 1, 512, 1023, 1024, 1024}
+	pages := []int{0, 1, 512, 1023, 1024, 1024}
 	sizes := []int{1024, 1024, 1024, 1024, 1024, 1025}
 	results := []int{1024, 1024, 1024, 2046, 1024, 2048}
-	if len(units) != len(sizes) && len(sizes) != len(results) {
+	if len(pages) != len(sizes) && len(sizes) != len(results) {
 		t.Error()
 	}
-	for i := 0; i < len(units); i++ {
-		b.unit = units[i]
+	for i := 0; i < len(pages); i++ {
+		b.page = pages[i]
 		size := sizes[i]
-		if b.unit > 0 && size%b.unit > 0 {
-			size = size/b.unit*b.unit + b.unit
+		if b.page > 0 && size%b.page > 0 {
+			size = size/b.page*b.page + b.page
 		}
 		if size != results[i] {
 			t.Error(i, size, results[i])
