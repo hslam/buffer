@@ -44,12 +44,12 @@ func main() {
 	buffers := buffer.NewBuffers(1024)
 	size := 65536
 
-	p := buffers.AssignPool(size)
-	buf := p.GetBuffer(size)
-	p.PutBuffer(buf)
-
-	buf = buffers.GetBuffer(size)
+	buf := buffers.GetBuffer(size)
 	buffers.PutBuffer(buf)
+
+	p := buffers.AssignPool(size)
+	buf = p.GetBuffer(size)
+	p.PutBuffer(buf)
 }
 ```
 
