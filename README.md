@@ -18,6 +18,20 @@ go get github.com/hslam/buffer
 import "github.com/hslam/buffer"
 ```
 ### Usage
+#### Simple Example
+```go
+package main
+
+import (
+	"github.com/hslam/buffer"
+)
+
+func main() {
+	buf := buffer.GetBuffer(1024)
+	buffer.PutBuffer(buf)
+}
+```
+
 #### Example
 ```go
 package main
@@ -27,11 +41,15 @@ import (
 )
 
 func main() {
-	buffers := buffer.NewBuffers(64)
-	size := 1024
+	buffers := buffer.NewBuffers(1024)
+	size := 65536
+
 	p := buffers.AssignPool(size)
 	buf := p.GetBuffer(size)
 	p.PutBuffer(buf)
+
+	buf = buffers.GetBuffer(size)
+	buffers.PutBuffer(buf)
 }
 ```
 
