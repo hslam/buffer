@@ -44,7 +44,7 @@ func TestAssignPool(t *testing.T) {
 }
 
 func BenchmarkAssignPool(b *testing.B) {
-	bs := NewBuffers(0)
+	bs := NewBuffers(pageSize)
 	for i := 0; i < b.N; i++ {
 		size := i % (64 * 1024)
 		bs.AssignPool(size)
@@ -164,7 +164,7 @@ func BenchmarkAssignPoolPageSize16384(b *testing.B) {
 }
 
 func BenchmarkAssignSizedPool(b *testing.B) {
-	bs := NewBuffers(0)
+	bs := NewBuffers(pageSize)
 	size := 64 * 1024
 	bs.AssignPool(size)
 	for i := 0; i < b.N; i++ {
@@ -458,7 +458,7 @@ func BenchmarkAssignPoolAndBuffersPageSize16384(b *testing.B) {
 }
 
 func BenchmarkSizedBuffer(b *testing.B) {
-	bs := NewBuffers(0)
+	bs := NewBuffers(pageSize)
 	size := 64 * 1024
 	p := bs.AssignPool(size)
 	for i := 0; i < b.N; i++ {
