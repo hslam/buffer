@@ -73,14 +73,7 @@ func NewBuffers(pageSize int) *Buffers {
 // AssignPool assigns a fixed size bytes pool with the given size.
 func (b *Buffers) AssignPool(size int) *Pool {
 	if size < threshold {
-		var index uint
-		for i := uint(0); i < 61; i++ {
-			if uint(size) <= uint(1)<<(i+3) {
-				index = i
-				break
-			}
-		}
-		return b.pools[index]
+		return b.pools[assignIndex(size)]
 	}
 	var alignedSize = size
 	if size%b.pageSize > 0 {
@@ -117,6 +110,39 @@ func (b *Buffers) GetBuffer(size int) []byte {
 // PutBuffer frees the bytes to the pool.
 func (b *Buffers) PutBuffer(buf []byte) {
 	b.AssignPool(cap(buf)).PutBuffer(buf)
+}
+
+func assignIndex(size int) (idx uint) {
+	var t = size
+	switch {
+	case t < 1<<3+1:
+		return 0
+	case t < 1<<4+1:
+		return 1
+	case t < 1<<5+1:
+		return 2
+	case t < 1<<6+1:
+		return 3
+	case t < 1<<7+1:
+		return 4
+	case t < 1<<8+1:
+		return 5
+	case t < 1<<9+1:
+		return 6
+	case t < 1<<10+1:
+		return 7
+	case t < 1<<11+1:
+		return 8
+	case t < 1<<12+1:
+		return 9
+	case t < 1<<13+1:
+		return 10
+	case t < 1<<14+1:
+		return 11
+	case t < 1<<15+1:
+		return 12
+	}
+	return 13
 }
 
 // defaultBuffers is the default instance of *Buffers.

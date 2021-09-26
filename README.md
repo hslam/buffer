@@ -59,12 +59,12 @@ go test -bench=. -benchmem -benchtime=10s -timeout 30m
 goos: darwin
 goarch: amd64
 pkg: github.com/hslam/buffer
-BenchmarkAssignPool-8        	761908507	        14.86 ns/op	       0 B/op	       0 allocs/op
-BenchmarkAssignSizedPool-8   	715705329	        16.51 ns/op	       0 B/op	       0 allocs/op
-BenchmarkBuffers-8           	180733172	        65.95 ns/op	      24 B/op	       1 allocs/op
-BenchmarkSizedBuffer-8       	305911215	        38.85 ns/op	      24 B/op	       1 allocs/op
+BenchmarkAssignPool-8        	1000000000	         4.507 ns/op	       0 B/op	       0 allocs/op
+BenchmarkAssignSizedPool-8   	699822374	        16.72 ns/op	       0 B/op	       0 allocs/op
+BenchmarkBuffers-8           	254406498	        46.63 ns/op	      24 B/op	       1 allocs/op
+BenchmarkSizedBuffer-8       	302837005	        39.32 ns/op	      24 B/op	       1 allocs/op
 PASS
-ok  	github.com/hslam/buffer	61.729s
+ok  	github.com/hslam/buffer	51.466s
 ```
 
 ## License
