@@ -35,8 +35,12 @@ type Pool struct {
 }
 
 // GetBuffer returns a bytes from the pool with the given size.
-func (p *Pool) GetBuffer(size int) []byte {
-	return p.pool.Get().([]byte)[:size]
+func (p *Pool) GetBuffer(size int) (buf []byte) {
+	buf = p.pool.Get().([]byte)
+	if size > 0 {
+		buf = buf[:size]
+	}
+	return
 }
 
 // PutBuffer frees the bytes to the pool.
