@@ -34,6 +34,11 @@ type Pool struct {
 	pool *sync.Pool
 }
 
+// AlignedSize returns the aligned size.
+func (p *Pool) AlignedSize() int {
+	return p.size
+}
+
 // GetBuffer returns a bytes from the pool with the given size.
 func (p *Pool) GetBuffer(size int) (buf []byte) {
 	buf = p.pool.Get().([]byte)

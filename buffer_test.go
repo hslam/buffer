@@ -16,7 +16,7 @@ func TestAssignPool(t *testing.T) {
 	for i := 0; i < 65*1024; i++ {
 		size := i
 		p := AssignPool(size)
-		if p.size < size {
+		if p.AlignedSize() < size {
 			t.Error(p.size)
 		}
 		buf := GetBuffer(size)
